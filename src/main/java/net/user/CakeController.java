@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,15 @@ public class CakeController {
 @Autowired 
 private OrderCakeService orderCakeService;
 
+@GetMapping("/{slug}")
+public String page(@PathVariable String slug,ModelMap model) {
+	
+	List<OrderCa> listOrderCa = orderCakeService.getAllOrderCake(slug);
+
+	model.addAttribute("lstQ",listOrderCa);
+	model.addAttribute("slug",slug);
+	return "page";
+}
 
 	@GetMapping("/home")
 	public String home(ModelMap model) {
