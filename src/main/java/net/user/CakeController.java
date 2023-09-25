@@ -32,19 +32,6 @@ public class CakeController {
 @Autowired 
 private OrderCakeService orderCakeService;
 
-@GetMapping("/{slug}")
-public String page(@PathVariable String slug,ModelMap model) {
-	
-	if(slug == null || slug.equals("")) {
-		slug = "java";
-	}
-	List<OrderCa> listOrderCa = orderCakeService.getAllOrderCake(slug);
-
-	model.addAttribute("lstQ",listOrderCa);
-	model.addAttribute("slug",slug);
-	return "page";
-}
-
 	@GetMapping("/home")
 	public String home(ModelMap model) {
 		
@@ -66,6 +53,11 @@ public String page(@PathVariable String slug,ModelMap model) {
 		model.addAttribute("order",order);
 		System.out.println("Size:");
 		return "index";
+	}
+	
+	@GetMapping("/java")
+	public String page(ModelMap model) {
+		return "page";
 	}
   
 	@GetMapping("/service.html")
