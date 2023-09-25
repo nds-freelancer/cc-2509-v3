@@ -35,6 +35,9 @@ private OrderCakeService orderCakeService;
 @GetMapping("/{slug}")
 public String page(@PathVariable String slug,ModelMap model) {
 	
+	if(slug == null || slug.equals("")) {
+		slug = "java";
+	}
 	List<OrderCa> listOrderCa = orderCakeService.getAllOrderCake(slug);
 
 	model.addAttribute("lstQ",listOrderCa);
